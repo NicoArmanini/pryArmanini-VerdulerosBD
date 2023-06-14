@@ -33,13 +33,13 @@
             this.btnGrabar = new System.Windows.Forms.Button();
             this.lblNombreProducto = new System.Windows.Forms.Label();
             this.mrcRegistro = new System.Windows.Forms.GroupBox();
+            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
+            this.lblFechaVenta = new System.Windows.Forms.Label();
             this.cmbNombreVendedor = new System.Windows.Forms.ComboBox();
             this.cmbNombreProducto = new System.Windows.Forms.ComboBox();
             this.txtKilos = new System.Windows.Forms.TextBox();
             this.lblKilos = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.lblFechaVenta = new System.Windows.Forms.Label();
-            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.mrcRegistro.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +47,7 @@
             // 
             this.lblVerduleria.AutoSize = true;
             this.lblVerduleria.Font = new System.Drawing.Font("Modern No. 20", 20.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVerduleria.Location = new System.Drawing.Point(66, 18);
+            this.lblVerduleria.Location = new System.Drawing.Point(78, 18);
             this.lblVerduleria.Name = "lblVerduleria";
             this.lblVerduleria.Size = new System.Drawing.Size(133, 29);
             this.lblVerduleria.TabIndex = 0;
@@ -97,6 +97,23 @@
             this.mrcRegistro.TabStop = false;
             this.mrcRegistro.Text = "Registro";
             // 
+            // dtpFecha
+            // 
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFecha.Location = new System.Drawing.Point(70, 210);
+            this.dtpFecha.Name = "dtpFecha";
+            this.dtpFecha.Size = new System.Drawing.Size(105, 20);
+            this.dtpFecha.TabIndex = 12;
+            // 
+            // lblFechaVenta
+            // 
+            this.lblFechaVenta.AutoSize = true;
+            this.lblFechaVenta.Location = new System.Drawing.Point(73, 184);
+            this.lblFechaVenta.Name = "lblFechaVenta";
+            this.lblFechaVenta.Size = new System.Drawing.Size(88, 13);
+            this.lblFechaVenta.TabIndex = 11;
+            this.lblFechaVenta.Text = "Fecha de Ventas";
+            // 
             // cmbNombreVendedor
             // 
             this.cmbNombreVendedor.FormattingEnabled = true;
@@ -137,23 +154,6 @@
             this.btnSalir.TabIndex = 8;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
-            // 
-            // lblFechaVenta
-            // 
-            this.lblFechaVenta.AutoSize = true;
-            this.lblFechaVenta.Location = new System.Drawing.Point(73, 184);
-            this.lblFechaVenta.Name = "lblFechaVenta";
-            this.lblFechaVenta.Size = new System.Drawing.Size(88, 13);
-            this.lblFechaVenta.TabIndex = 11;
-            this.lblFechaVenta.Text = "Fecha de Ventas";
-            // 
-            // dtpFecha
-            // 
-            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFecha.Location = new System.Drawing.Point(70, 210);
-            this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(105, 20);
-            this.dtpFecha.TabIndex = 12;
             // 
             // frmRegistro
             // 
