@@ -7,7 +7,7 @@ using System.Data.OleDb;
 using System.Windows.Forms;
 using System.Data;
 
-namespace PryVentasVerduleros_Cantallops
+namespace pryArmanini_VerdulerosBD
 {
     class ClsConexion
     {
