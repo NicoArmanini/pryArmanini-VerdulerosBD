@@ -30,7 +30,7 @@ namespace pryArmanini_VerdulerosBD
             try
             {
                 ClsConexion Datos1 = new ClsConexion();
-                Datos1.RegistrarVenta(cmbNombreVendedor.Text, cmbNombreProducto.Text, dtpFecha.Value, txtKilos.Text);
+                Datos1.RegistrarVenta(Convert.ToInt32(cmbNombreVendedor.Text), Convert.ToInt32(cmbNombreProducto.Text), dtpFecha.Value, Convert.ToInt32(txtKilos.Text));
                 
             }
             catch (Exception ex)

@@ -67,7 +67,7 @@ namespace pryArmanini_VerdulerosBD
             }
         }
 
-        public void RegistrarVenta(string cmbNombreVendedor, string cmbNombreProducto, DateTime dtpFecha, string txtKilos)
+        public void RegistrarVenta(int cmbNombreVendedor, int cmbNombreProducto, DateTime dtpFecha, int txtKilos)
         {
 
             string conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=VERDULEROS.mdb;";
@@ -82,10 +82,10 @@ namespace pryArmanini_VerdulerosBD
                 cmdVendedor.Connection.Open();
                 cmdVendedor.CommandType = CommandType.Text;
                 cmdVendedor.CommandText = sql;
-
+                string FechaString = dtpFecha.ToShortDateString();
                 cmdVendedor.Parameters.AddWithValue("@vendedor", cmbNombreVendedor);
                 cmdVendedor.Parameters.AddWithValue("@producto", cmbNombreProducto);
-                cmdVendedor.Parameters.AddWithValue("@fechaventa", dtpFecha);
+                cmdVendedor.Parameters.AddWithValue("@fechaventa", FechaString);
                 cmdVendedor.Parameters.AddWithValue("@cantidad", txtKilos);
 
                 cmdVendedor.ExecuteNonQuery();
