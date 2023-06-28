@@ -11,62 +11,86 @@ namespace pryArmanini_VerdulerosBD
 {
     class ClsConexion
     {
-        OleDbConnection cnn;
+        OleDbConnection cone;
         OleDbCommand cmdVendedor;
         OleDbCommand cmdProducto;
-        OleDbCommand cmdVentas;
         OleDbDataReader rdrVendedor;
         OleDbDataReader rdrProducto;
-        OleDbDataReader rdrVentas;
 
-        public void CargarDatos(ComboBox cmbProducto, ComboBox cmbVendedor)
+        public void CargarDatos(ComboBox cmbNombreProducto, ComboBox cmbNombreVendedor)
         {
             string conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=VERDULEROS.mdb;";
-            cmbProducto.SelectedIndex = -1;
-            cmbVendedor.SelectedIndex = -1;
+            cmbNombreProducto.SelectedIndex = -1;
+            cmbNombreVendedor.SelectedIndex = -1;
             try
             {
-                cnn = new OleDbConnection(conexion);
+                cone = new OleDbConnection(conexion);
                 cmdVendedor = new OleDbCommand();
-                cmdVendedor.Connection = cnn;
-                cmdVendedor.CommandType= CommandType.TableDirect;
+                cmdVendedor.Connection = cone;
+                cmdVendedor.CommandType = CommandType.TableDirect;
                 cmdVendedor.CommandText = "Vendedores";
 
                 cmdProducto = new OleDbCommand();
-                cmdProducto.Connection = cnn;
+                cmdProducto.Connection = cone;
                 cmdProducto.CommandType = CommandType.TableDirect;
                 cmdProducto.CommandText = "Productos";
 
-                cmdVentas = new OleDbCommand();
-                cmdVentas.Connection = cnn;
-                cmdVentas.CommandType = CommandType.TableDirect;
-                cmdVentas.CommandText = "Ventas";
-
-                cnn.Open();
-
+                cone.Open();
                 rdrVendedor = cmdVendedor.ExecuteReader();
                 rdrProducto = cmdProducto.ExecuteReader();
-                rdrVentas = cmdVentas.ExecuteReader();
 
-                HashSet<string> Vendedores = new HashSet<string>();
-                HashSet<string> Productos = new HashSet<string>();
+                cmbNombreVendedor.Items.Clear();
+                cmbNombreProducto.Items.Clear();
 
+                DataTable tablaVendedor = new DataTable();
+                DataTable tablaProducto = new DataTable();
 
-                while (rdrVendedor.Read())
+                if (rdrVendedor.HasRows)
                 {
-                    string Vendedor = rdrVendedor[1].ToString();
-                    Vendedores.Add(Vendedor);
+                    tablaVendedor.Load(rdrVendedor);
+                    cmbNombreVendedor.DataSource = tablaVendedor;
+                    cmbNombreVendedor.ValueMember = "IdVendedor";
+                    cmbNombreVendedor.DisplayMember = "NombreVendedor";
                 }
 
-                while (rdrProducto.Read())
+                if (rdrProducto.HasRows)
                 {
-                    string Producto = rdrProducto[1].ToString();
-                    Productos.Add(Producto);
+                    tablaProducto.Load(rdrProducto);
+                    cmbNombreProducto.DataSource = tablaProducto;
+                    cmbNombreProducto.ValueMember = "IdProducto";
+                    cmbNombreProducto.DisplayMember = "NomProducto";
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message, "", MessageBoxButtons.OK);
+            }
+        }
 
-                cmbProducto.Items.AddRange(Productos.ToArray());
-                cmbVendedor.Items.AddRange(Vendedores.ToArray());
+        public void RegistrarVenta(string cmbNombreVendedor, string cmbNombreProducto, DateTime dtpFecha, string txtKilos)
+        {
 
+            string conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=VERDULEROS.mdb;";
+            string sql = "INSERT INTO Ventas ([Cod Vendedor], [Cod Producto], Fecha, Kilos)" +
+                         " VALUES (@vendedor, @producto, @fechaventa, @cantidad)";
+            try
+            {
+                cone = new OleDbConnection(conexion);
+                cmdVendedor = new OleDbCommand();
+                cmdVendedor.Connection = cone;
+
+                cmdVendedor.Connection.Open();
+                cmdVendedor.CommandType = CommandType.Text;
+                cmdVendedor.CommandText = sql;
+
+                cmdVendedor.Parameters.AddWithValue("@vendedor", cmbNombreVendedor);
+                cmdVendedor.Parameters.AddWithValue("@producto", cmbNombreProducto);
+                cmdVendedor.Parameters.AddWithValue("@fechaventa", dtpFecha);
+                cmdVendedor.Parameters.AddWithValue("@cantidad", txtKilos);
+
+                cmdVendedor.ExecuteNonQuery();
+
+                MessageBox.Show("Venta grabada con Exito!!", "", MessageBoxButtons.OK);
             }
             catch (Exception ex)
             {
